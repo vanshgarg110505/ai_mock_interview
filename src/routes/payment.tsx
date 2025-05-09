@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '@/config/firebase.config';
+import { doc, updateDoc } from 'firebase/firestore';
+import { useAuth } from '@clerk/clerk-react';
 
 const PaymentPage: React.FC = () => {
   const navigate = useNavigate();
+  const { userId } = useAuth();
   const [formData, setFormData] = useState({
     cardNumber: '',
     cardName: '',
@@ -11,13 +15,22 @@ const PaymentPage: React.FC = () => {
     plan: 'pro' // default plan
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Store selected plan in localStorage
-    localStorage.setItem('userPlan', formData.plan);
-    // Here you would typically integrate with a payment processor like Stripe
-    // For now, we'll just simulate a successful payment
-    navigate('/payment-success');
+    if (!userId) {
+      alert('You must be signed in to purchase a plan.');
+      return;
+    }
+    try {
+      // Update the user's plan in Firestore
+      const userRef = doc(db, 'users', userId);
+      await updateDoc(userRef, { plan: formData.plan });
+      // Simulate successful payment
+      navigate('/payment-success');
+    } catch (error) {
+      alert('Failed to update plan. Please try again.');
+      console.error(error);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
