@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ServicesPage: React.FC = () => {
+  const [userPlan, setUserPlan] = useState<string | null>(null);
+
+  useEffect(() => {
+    const plan = localStorage.getItem('userPlan');
+    if (plan) setUserPlan(plan);
+  }, []);
+
   const services = [
     {
       title: "Technical Interviews",
@@ -67,6 +74,15 @@ const ServicesPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
+        {/* Show user plan if available */}
+        {userPlan && (
+          <div className="mb-8 text-center">
+            <span className="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-lg font-semibold">
+              Your Current Plan: {userPlan.charAt(0).toUpperCase() + userPlan.slice(1)}
+            </span>
+          </div>
+        )}
+
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
@@ -134,7 +150,10 @@ const ServicesPage: React.FC = () => {
                   <span className="ml-2 text-gray-600">Email support</span>
                 </li>
               </ul>
-              <button className="w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button 
+                onClick={() => window.location.href = '/payment'}
+                className="w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
                 Get Started
               </button>
             </div>
@@ -170,7 +189,10 @@ const ServicesPage: React.FC = () => {
                   <span className="ml-2 text-gray-600">Progress tracking</span>
                 </li>
               </ul>
-              <button className="w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button 
+                onClick={() => window.location.href = '/payment'}
+                className="w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
                 Get Started
               </button>
             </div>
@@ -203,7 +225,10 @@ const ServicesPage: React.FC = () => {
                   <span className="ml-2 text-gray-600">Custom integrations</span>
                 </li>
               </ul>
-              <button className="w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button 
+                onClick={() => window.location.href = '/payment'}
+                className="w-full py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
                 Contact Sales
               </button>
             </div>
@@ -217,7 +242,7 @@ const ServicesPage: React.FC = () => {
             Choose a plan and start practicing with our AI-powered interview platform today.
           </p>
           <a
-            href="/signup"
+            href="/payment"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Get Started

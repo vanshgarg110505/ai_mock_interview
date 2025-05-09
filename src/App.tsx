@@ -15,6 +15,8 @@ import { Feedback } from "./routes/feedback"
 import ContactPage from "./routes/contact"
 import AboutPage from "./routes/about"
 import ServicesPage from "./routes/services"
+import PaymentPage from "./routes/payment"
+import PaymentSuccessPage from "./routes/payment-success"
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment-success" element={<PaymentSuccessPage />} />
         </Route>
 
         {/* authentication layout */}
