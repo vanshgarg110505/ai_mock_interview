@@ -8,7 +8,7 @@ const ContactPage: React.FC = () => {
 
   useEffect(() => {
     // Initialize EmailJS with your public key
-    emailjs.init('YOUR_PUBLIC_KEY');
+    emailjs.init('bb00RFbKNYgIGqjNN');
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,8 +19,8 @@ const ContactPage: React.FC = () => {
       if (!form.current) return;
 
       const result = await emailjs.sendForm(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        'service_d6t68m2',
+        'template_a4rwu8l',
         form.current
       );
 
@@ -112,10 +112,6 @@ const ContactPage: React.FC = () => {
               <div>
                 <h3 className="text-sm font-medium text-gray-500">Email</h3>
                 <p className="mt-1 text-gray-900">support@aimockinterview.com</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Location</h3>
-                <p className="mt-1 text-gray-900">San Francisco, CA</p>
               </div>
               <div>
                 <h3 className="text-sm font-medium text-gray-500">Business Hours</h3>
